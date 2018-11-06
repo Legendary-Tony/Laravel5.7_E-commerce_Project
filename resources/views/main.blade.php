@@ -19,21 +19,32 @@
                             <div class="active item">
                                 <ul class="thumbnails">  
 
-                                    @foreach ($products as $product)
-                                    <li class="span3">
-                                        <div class="product-box">
-                                            <span class="sale_tag"></span>
-                                            <p><a href="{{ route('products.show', $product->id) }}"><img src="{{ $product->image }}" alt="" /></a></p>
-                                            <a href="{{ route('products.show', $product->id) }}" class="title">{{ $product->name }}</a><br/>
-                                            @foreach ($product->categories as $category)
-                                            <a href="{{ route('products', ['category' => $category->slug ]) }}" class="category">{{ $category->name }}</a>
-                                            @endforeach
-                                            <p class="price">{{ money_format('$%i', $product->price / 363.50) }}</p>
-                                        </div>
-                                    </li>
-                                    @endforeach                                    
+                                    @foreach ($products->chunk(4) as $item)
+                                    <div class="row" >
+                                        @foreach ($item as $product)
+                                        <li class="span3">
+                                            <div class="product-box chunk">
 
+                                                <span class="sale_tag"></span>
+                                                <p><a href="{{ route('products.show', $product->slug) }}"><img src="{{ Storage::disk('s3')->url($product->image)}}" alt="" /></a></p>
+                                                <a href="{{ route('products.show', $product->slug) }}" class="title">{{ $product->name }}</a><br/>
+                                                @foreach ($product->categories as $category)
+                                                <a href="{{ route('products', ['category' => $category->slug ]) }}" class="category">{{ $category->name }}</a>
+                                                @endforeach
+                                                <p class="price">{{ money_format('$%i', $product->price / 363.50) }}</p>
+
+                                            </div>
+                                        </li>
+                                        @endforeach
+                                    </div>
+                                    @endforeach
                                 </ul>
+                                <hr>
+                                <div class="pager pagination-larage pagination-centered">
+                                    <ul>
+                                        <li>{{ $products->links('vendor.pagination.bootstrap-4') }}</li>
+                                    </ul> 
+                                </div>
                             </div>
                         </div>                          
                     </div>

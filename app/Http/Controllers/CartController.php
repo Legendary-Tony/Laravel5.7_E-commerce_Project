@@ -32,8 +32,9 @@ class CartController extends Controller
   }
 
 
-  public function AddToCart(Request $request, $id)
+  public function AddToCart(Request $request,$id)
   {
+    // dd($request->all());
     $product = Product::find($id);
     $oldCart = Session::has('cart') ? Session::get('cart') : null;
     $cart = new ShopCart($oldCart);
@@ -57,17 +58,31 @@ class CartController extends Controller
   return redirect()->back();
 }
 
-public function getRemoveItems($id){
- $oldCart = Session::has('cart') ? Session::get('cart') : null;
- $cart = new ShopCart($oldCart);
- $cart->removeItem($id);
+public function getRemoveItems(Request $request, $id){
+  // $this->validate($request, [
+  //   'checkbox' => 'required',
+  // ]);
 
- if (count($cart->items) > 0) {
-   Session::put('cart', $cart);
+  if ($request->input('checkbox')) {
+   $oldCart = Session::has('cart') ? Session::get('cart') : null;
+   $cart = new ShopCart($oldCart);
+   $cart->removeItem($id);
+
+   if (count($cart->items) > 0) {
+     Session::put('cart', $cart);
+   } else {
+     Session::forget('cart');
+
+     return redirect()->back()->with('success', 'Product Removed');
+   }
  } else {
-   Session::forget('cart');
+     return redirect()->back()->with('delete', 'Please, select an item');
  }
- return redirect()->back();
+
+
+
+
 }
+
 
 }

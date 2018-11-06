@@ -17,10 +17,10 @@ class CreateCategoryProductTable extends Migration
             $table->increments('id');
 
             $table->integer('product_id')->unsigned()->nullable();
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
 
             $table->integer('category_id')->unsigned()->nullable();
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('category')->onDelete('cascade');
 
             $table->timestamps();
         });

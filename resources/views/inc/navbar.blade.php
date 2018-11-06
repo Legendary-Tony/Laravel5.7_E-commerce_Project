@@ -1,15 +1,11 @@
 <div id="top-bar" class="container">
 	<div class="row">
 		<div class="span4">
-			<form method="POST" class="search_form">
-				<input type="text" class="input-block-level search-query" Placeholder="eg. T-sirt">
-			</form>
+			@include('inc.search-form')
 		</div>
 		<div class="span8">
-			
 			<div id="menu"  class="account pull-right">
 				<ul class="user-menu">				
-					
 					<li><i class="fas fa-shopping-cart"></i> <a href="{{ route('cart.index') }}">Cart</a> 	
 						<span class="badge badge-pill badge-warning">@if (Session::has('cart'))
 							{{ Session::get('cart')->totalQty}}
@@ -81,7 +77,7 @@
 						</ul>
 					</li> --}}															
 					{{-- <li><a href="./products.html">Man</a></li>	 --}}		
-												
+
 					<li><a href="{{ route('products') }}">Our Store</a></li>
 					<li><a href="{{ route('about.us') }}">About Us</a></li>
 					<li><a href="{{ route('contact.us') }}">Contact Us</a></li>

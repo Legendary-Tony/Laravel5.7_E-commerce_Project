@@ -34,7 +34,7 @@
 
             <td>{{ $item['qty'] }}</td>
 
-            <td>{{ money_format('$%i', $item['price'] / 363.50 )}}</td>
+            <td>{{ money_format('$%i', $item['price'] / 364)}}</td>
 
             <td>{{ money_format('$%i', $order->discount / 100) }}</td>
             <td><form method="POST" action="{{ route('profile.delete', $order->id) }}">

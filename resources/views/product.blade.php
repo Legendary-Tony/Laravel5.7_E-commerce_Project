@@ -14,7 +14,7 @@
 		<div class="span9">
 			<div class="row">
 				<div class="span4">
-					<a href="{{ $products->image }}" class="thumbnail" data-fancybox-group="group1" title="Description 1"><img alt="" src="{{ $products->image }}"></a>												
+					<a href="{{ Storage::disk('s3')->url($products->image)}}" class="thumbnail" data-fancybox-group="group1" title="Description 1"><img alt="" src="{{ Storage::disk('s3')->url($products->image)}}"></a>												
 					{{-- <ul class="thumbnails small">								
 						<li class="span1">
 							<a href="{{ asset('themes/images/ladies/2.jpg') }}" class="thumbnail" data-fancybox-group="group1" title="Description 2"><img src="{{ asset('themes/images/ladies/2.jpg') }}" alt=""></a>
@@ -53,6 +53,7 @@
 							<input type="hidden" name="name" value="{{ $products->name }}">
 							<input type="hidden" name="price" value="{{ $products->price }}">
 							
+							
 						{{-- <label class="checkbox">
 							<input type="checkbox" value=""> Option one is this and that
 						</label>
@@ -61,9 +62,19 @@
 							<input type="checkbox" value=""> Be sure to include why it's great
 						</label> --}}
 						<p>&nbsp;</p>
+						<div>{!! $stock !!}</div>
+						<p>&nbsp;</p>
+						@if ($products->quantity > 0)
 						<label>Qty:</label>
-						<input type="text" class="span1" placeholder="1">
+						<select name="quantity" class="span1" value="{{ $products->id }}">
+							@for ($i = 1; $i < 5 + 1; $i++)
+								<option {{ $products->quantity == $i ? 'selected' : '' }} >{{ $i }}</option>
+
+							@endfor
+						</select>
+
 						<button class="btn btn-inverse" type="submit">Add to cart</button>
+						@endif
 					</form>
 					
 					
@@ -77,7 +88,7 @@
 						<li class=""><a href="#profile">Additional Information</a></li>
 					</ul>							 
 					<div class="tab-content">
-						<div class="tab-pane active" id="home">{{ $products->description }}</div>
+						<div class="tab-pane active" id="home">{!! $products->description !!}</div>
 						<div class="tab-pane" id="profile">
 							<table class="table table-striped shop_attributes">	
 								<tbody>

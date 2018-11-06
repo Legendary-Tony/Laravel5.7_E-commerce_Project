@@ -15,6 +15,7 @@ class ProductTableSeeder extends Seeder
 
         Product::create([
             'name' => 'Id enim volumus',
+            'slug' => 'Id-enim-volumus',
             'image' => 'https://s3.eu-west-2.amazonaws.com/laravelecommerce/ecom/bootstrap-women-ware1.jpg',
             'description' => 'id contendimus; ut officii fructus sit ipsum officium.
             Lorem ipsum dolor sit amet; consectetur adipiscing elit. Mihi; inquam; qui te id ipsum rogavi? Fortemne possumus dicere eundem illum Torquatum? Apparet statim; quae sint officia; quae actiones. Duo Reges: constructio interrete.',
@@ -28,6 +29,7 @@ class ProductTableSeeder extends Seeder
 
             'image' => 'https://s3.eu-west-2.amazonaws.com/laravelecommerce/ecom/bootstrap-women-ware2.jpg',
             'name' => 'consectetur',
+            'slug' => 'consectetur',
             'description' => 'id contendimus; ut officii fructus sit ipsum officium.
             Lorem ipsum dolor sit amet;  adipiscing elit. Mihi; inquam; qui te id ipsum rogavi? Fortemne possumus dicere eundem illum Torquatum? Apparet statim; quae sint officia; quae actiones. Duo Reges: constructio interrete.',
             'size' => 'Medium; Large',
@@ -39,6 +41,7 @@ class ProductTableSeeder extends Seeder
         Product::create([
             'image' => 'https://s3.eu-west-2.amazonaws.com/laravelecommerce/ecom/bootstrap-women-ware3.jpg',
             'name' => 'id contendimus',
+            'slug' => 'id-contendimus',
             'description' => 'ut officii fructus sit ipsum officium.
             Lorem ipsum dolor sit amet; consectetur adipiscing elit. Mihi; inquam; qui te id ipsum rogavi? Fortemne possumus dicere eundem illum Torquatum? Apparet statim; quae sint officia; quae actiones. Duo Reges: constructio interrete.',
             'size' => 'Medium',
@@ -49,6 +52,7 @@ class ProductTableSeeder extends Seeder
         Product::create([
             'image' => 'https://s3.eu-west-2.amazonaws.com/laravelecommerce/ecom/bootstrap-women-ware4.jpg',
             'name' => 'Apparet statim',
+            'slug' => 'Apparet-statim',
             'description' => 'ut officii fructus sit ipsum officium; id contendimus.
             Lorem ipsum dolor sit amet; consectetur adipiscing elit. Mihi; inquam; qui te id ipsum rogavi? Fortemne possumus dicere eundem illum Torquatum? Apparet statim; quae sint officia; quae actiones. Duo Reges: constructio interrete.',
             'size' => 'Medium; Large',
@@ -60,6 +64,7 @@ class ProductTableSeeder extends Seeder
         Product::create([
             'image' => 'https://s3.eu-west-2.amazonaws.com/laravelecommerce/ecom/bootstrap-women-ware5.jpg',
             'name' => 'constructio interrete',
+            'slug' => 'constructio-interrete',
             'description' => 'id contendimus; ut officii fructus sit ipsum officium.
             Lorem ipsum dolor sit amet; consectetur adipiscing elit. Mihi; inquam; qui te id ipsum rogavi? Fortemne possumus dicere eundem illum Torquatum? Apparet statim; quae sint officia; quae actiones. Duo Reges: constructio interrete.',
             'size' => 'Small; Medium; Large',
@@ -71,6 +76,7 @@ class ProductTableSeeder extends Seeder
         Product::create([
             'image' => 'https://s3.eu-west-2.amazonaws.com/laravelecommerce/ecom/bootstrap-women-ware6.jpg',
             'name' => 'Fortemne possumus',
+            'slug' => 'Fortemne-possumus',
             'description' => 'id contendimus; ut officii fructus sit ipsum officium.
             Lorem ipsum dolor sit amet; consectetur adipiscing elit. Mihi; inquam; qui te id ipsum rogavi? Fortemne possumus dicere eundem illum Torquatum? Apparet statim; quae sint officia; quae actiones. Duo Reges: constructio interrete.',
             'size' => 'Medium; Large',

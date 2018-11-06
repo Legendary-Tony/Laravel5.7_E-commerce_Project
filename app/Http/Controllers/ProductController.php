@@ -8,11 +8,7 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         if (request()->category) {
@@ -24,7 +20,7 @@ class ProductController extends Controller
 
         } else {
 
-            $products = Product::take(8);
+            $products = Product::inRandomOrder()->take(6);
             $categories = Category::all();
             $categoryName = 'Featured Products';
         }
@@ -35,20 +31,16 @@ class ProductController extends Controller
         ]);
     }
 
-    
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show($slug)
     {
-        $products = Product::where('id', $id)->first();
+        $products = Product::where('slug', $slug)->first();
         $categories = Category::all();
-        $related = Product::where('id', '!=', $id)->Random()->get();
+        $related = Product::where('slug', '!=', $slug)->Random()->get();
+        $stock = getStock($products->quantity);
+       
         return view('product', [
+            'stock' => $stock,
             'products' => $products,
             'categories' => $categories,
             'related' => $related

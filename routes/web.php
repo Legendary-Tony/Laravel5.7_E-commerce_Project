@@ -16,16 +16,27 @@ Route::get('/about_us', 'MainController@about_us')->name('about.us');
 Route::get('/contact_us', 'MainController@contact_us')->name('contact.us');
 Route::get('/profile', 'HomeController@index')->name('profile');
 Route::delete('/profile/{id}', 'HomeController@delete')->name('profile.delete');
+Route::get('/search', 'MainController@search')->name('search');
+// Route::get('/emails/orders/mailorder',  'MainController@order');
 
+
+// Route::get('/emails/orders/mailorder', function () {
+//     $invoice = App\Order::find(1);
+
+//     return new App\Mail\OrderMail($invoice);
+// });
+
+//PRODUCTS ROUTE
 Route::get('/shop', 'ProductController@index')->name('products');
-Route::get('/shop/{id}', 'ProductController@show')->name('products.show');
+Route::get('/shop/{slug}', 'ProductController@show')->name('products.show');
+
 
 //CART ITEMS
 Route::get('/cart', 'CartController@index')->name('cart.index');
 //Route::post('/cart{product_id}', 'CartController@add')->name('cart.store');
 Route::post('/cart/{id}', 'CartController@AddToCart')->name('cart.store');
 Route::get('/reduce/{id}', 'CartController@getReduceByOne')->name('cart.reduce');
-Route::get('/remove/{id}', 'CartController@getRemoveItems')->name('cart.remove');
+Route::delete('/remove/{id}', 'CartController@getRemoveItems')->name('cart.remove');
 
 //CHECK OUT
 Route::get('/checkout', 'CheckoutController@getIndex')->name('checkout')->middleware('auth');
@@ -41,3 +52,8 @@ Route::delete('/coupon', 'CouponController@couponDelete')->name('coupon.delete')
 Auth::routes();
 
 
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});

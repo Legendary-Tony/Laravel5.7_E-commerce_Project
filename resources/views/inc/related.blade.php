@@ -14,8 +14,8 @@
 					<li class="span3">
 						<div class="product-box">
 							<span class="sale_tag"></span>			
-							<a href="{{ route('products.show', $relate->id) }}"><img alt="" src="{{ $relate->image }}"></a><br/>
-							<a href="{{ route('products.show', $relate->id) }}" class="title">{{ $relate->name }}</a><br/>
+							<a href="{{ route('products.show', $relate->slug) }}"><img alt="" src="{{ Storage::disk('s3')->url($relate->image)}}"></a><br/>
+							<a href="{{ route('products.show', $relate->slug) }}" class="title">{{ $relate->name }}</a><br/>
 							@foreach ($relate->categories as $category)
 							<a href="{{ route('products', ['category', $category->slug]) }}" class="category">{{ $category->name}}</a>
 							@endforeach

@@ -8,27 +8,23 @@
 
 </section>
 <section class="main-content">
-
 	<div class="row">
-		
 		<div class="span9">
-			
-			
 			@include('inc.message')
-
 			<h4 class="title"><span class="text"><strong>Your</strong> Cart</span></h4>
 			@if (Session::has('cart'))
 			@foreach ($products as $product)
-			<table class="table table-striped">
-
+			<table class="table table-striped ms-12">
 				<thead>
 					<tr>
 						
+						<th>Remove</th>
 						<th>Image</th>
 						<th>Product Name</th>
 						<th>Quantity</th>
 						<th>Unit Price</th>
 						<th>Total</th>
+						<th>Action</th>
 
 					</tr>
 				</thead>
@@ -36,12 +32,17 @@
 				<tbody>
 
 					<tr>
-						
-						<td><a href=""><img alt="" src="{{ $product['item'] ['image'] }}"></a></td>
-						<td>{{ $product['item'] ['name'] }}</td>
-						<td><input type="text" placeholder="1" value="{{ $product['qty']}}" class="input-mini"></td>
-						<td>{{ Price($product) }}</td>
-						<td>{{ total($totalPrice) }}</td>
+						<form method="POST" action="{{ route('cart.remove', ['id' => $product['item']['id']])}}">
+							{{ csrf_field() }}
+							{{ method_field('delete')}}
+							<td><input type="checkbox" name='checkbox[]' value="$product['item']['id']"></td>
+							<td><a href=""><img alt="" src="{{ Storage::disk('s3')->url($product['item'] ['image'] )}}"></a></td>
+							<td>{{ $product['item'] ['name'] }}</td>
+							<td><input type="text" placeholder="1" value="{{ Session::has('cart') ? Session::get('cart')->qty : ''}}" class="input-mini"></td>
+							<td>{{ Price($product) }}</td>
+							<td>{{ total($totalPrice) }}</td>
+							<td><button type="submit" class="btn btn-danger">Delete</button></td>
+						</form>
 					</tr>			  
 
 
@@ -50,6 +51,9 @@
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						
+						
 						<td><strong>{{ total($totalPrice) }}</strong></td>
 					</tr>		  
 				</tbody>
@@ -66,21 +70,21 @@
 					Use Coupon Code
 				</label>	
 				<div class="input-group-append">
-					@foreach ($coupon_code as $coupon)
-					@foreach ($products as $product)
-						<span class="input-group-text"><input style="height: 22px; width: 150px;" class="form-control" type="text" value="{{ $totalPrice / 363.50 >= 10.00 ? $coupon->code : '' }}"  name="coupon_code"></span>
-					<span class="input-group-text"><button class="btn btn-default" type="submit">Apply</button></span>
-					@endforeach
-					@endforeach
-					
-				</div>
-			</form>
-			@endif
-			
-			
-			<hr>
+					{{-- @foreach ($coupon_code as $coupon)
+						@foreach ($products as $product) --}}
+						<span class="input-group-text"><input style="height: 22px; width: 150px;" class="form-control" type="text" value="{{ $totalPrice / 363.50 >= 10.00 ? $coupon_code[0]->code : '' }}"  name="coupon_code"></span>
+						<span class="input-group-text"><button class="btn btn-default" type="submit">Apply</button></span>
+					{{-- @endforeach
+						@endforeach --}}
+						
+					</div>
+				</form>
+				@endif
+				
+				
+				<hr>
 
-			<p class="cart-total right">
+				<p class="cart-total right">
 				{{-- @foreach ($products as $product)
 				<strong>Unit Price</strong>: ${{ $product['item']['price'] }}<br>
 				@endforeach --}}
@@ -99,14 +103,21 @@
 					<h3>You have no item(s) in cart!</h3>
 					@endif
 					@if (Session::has('cart'))
-					@foreach ($products as $remove)
-					<button type="button" id="menu" class="btn dropdown-toggle" data-toggle="dropdown">Action<span class="caret"></span></button>
+					
+					{{-- <button type="button" id="menu" class="btn dropdown-toggle" data-toggle="dropdown">Action<span class="caret"></span></button>
 					<ul class="dropdown-menu">
+						
+						@foreach ($products as $remove)
 						<a href="{{ route('cart.reduce', ['id' => $remove['item']['id']]) }}"><li>Remove One</li></a>
 						<br>
 						<a href="{{ route('cart.remove', ['id' => $remove['item']['id']]) }}""><li>Clear Cart</li></a>
-					</ul>
-					@endforeach
+						
+
+						@endforeach
+						
+					</ul> --}}
+					
+					
 				</div>	
 				@if (session()->has('coupon'))
 				<form style="display: inline;" method="POST" action="{{ route('coupon.delete') }}">

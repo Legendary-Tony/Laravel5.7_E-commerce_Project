@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('image');
             $table->string('size');
             $table->string('color');
+            $table->string('slug')->unique()->nullable();
             $table->timestamps();
         });
 
